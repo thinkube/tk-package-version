@@ -34,7 +34,7 @@ COPY src ./src
 RUN touch src/main.rs && cargo build --release
 
 # Runtime stage
-FROM library/alpine:3.20
+FROM library/alpine:latest
 
 # Install runtime dependencies and external tools
 RUN apk add --no-cache \

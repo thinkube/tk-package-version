@@ -55,7 +55,12 @@ RUN pip3 install --no-cache-dir --break-system-packages uv
 RUN npm install -g pnpm
 
 # Install security scanning tools
-RUN wget -q https://github.com/google/osv-scanner/releases/download/v2.2.2/osv-scanner_linux_amd64 -O /usr/local/bin/osv-scanner && \
+# Use curl with retries (matching the other base-image downloads) so a transient
+# GitHub hiccup doesn't fail the whole build — a bare `wget -q` here killed a
+# ~30-minute build on a single network blip.
+RUN curl -fSL --retry 5 --retry-delay 5 --retry-all-errors \
+      https://github.com/google/osv-scanner/releases/download/v2.2.2/osv-scanner_linux_amd64 \
+      -o /usr/local/bin/osv-scanner && \
     chmod +x /usr/local/bin/osv-scanner
 
 # Create non-root user

@@ -89,9 +89,8 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
 # Expose port
 EXPOSE 18080
 
-# Set environment variables
+# BASE_URL has no value in the image; the deployment sets it.
 ENV PORT=18080 \
-    BASE_URL=https://control.thinkube.com/tk-package-version \
     LOG_LEVEL=info \
     CACHE_TTL=300
 

@@ -29,8 +29,9 @@ struct Args {
     #[arg(short, long, env = "PORT", default_value = "18080")]
     port: u16,
 
-    /// Base URL for the server
-    #[arg(short, long, env = "BASE_URL", default_value = "http://localhost:18080")]
+    /// Public address of the server, written to the log. Required: set the
+    /// BASE_URL environment variable or pass --base-url.
+    #[arg(short, long, env = "BASE_URL")]
     base_url: String,
 
     /// Log level

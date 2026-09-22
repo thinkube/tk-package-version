@@ -43,7 +43,7 @@ Set by command-line flag or environment variable (`src/main.rs`):
 | Variable | Default | Meaning |
 |---|---|---|
 | `PORT` | `18080` | Port to listen on |
-| `BASE_URL` | `http://localhost:18080` | Public address, written to the log |
+| `BASE_URL` | none, required | Public address, written to the log. The server does not start without it. The deploy playbook sets it to `https://control.<domain>/tk-package-version`. |
 | `LOG_LEVEL` | `info` | Log level |
 | `CACHE_TTL` | `300` | Seconds a version lookup stays cached |
 
@@ -51,7 +51,7 @@ Set by command-line flag or environment variable (`src/main.rs`):
 
 ```bash
 cargo build --release
-cargo run -- --port 18080
+cargo run -- --port 18080 --base-url http://localhost:18080
 ```
 
 The MCP endpoint is then at `http://localhost:18080/mcp`. The resolve and audit tools need `uv`, `pnpm` and `osv-scanner` on `PATH`.
